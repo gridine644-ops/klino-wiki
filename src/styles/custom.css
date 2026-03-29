@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap');
+
+:root {
+  --sl-color-accent: #c8a84e;
+  --sl-color-accent-high: #e6c96e;
+  --sl-color-accent-low: rgba(200,168,78,0.15);
+  --sl-color-bg: #080610;
+  --sl-color-bg-nav: #0d0b18;
+  --sl-color-bg-sidebar: #0d0b18;
+  --sl-color-text: #e4ddd0;
+  --sl-color-text-accent: #c8a84e;
+  --sl-font: 'IM Fell English', 'Palatino Linotype', Georgia, serif;
+}
+
+body {
+  background-color: #080610;
+}
+
+::-webkit-scrollbar { width: 7px; }
+::-webkit-scrollbar-track { background: #080610; }
+::-webkit-scrollbar-thumb {
+  background: rgba(200,168,78,0.25);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(200,168,78,0.45);
+}
+
+.sl-markdown-content a {
+  color: #c8a84e;
+}

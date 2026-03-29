@@ -2,25 +2,34 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
-// https://astro.build/config
 export default defineConfig({
-	integrations: [
-		starlight({
-			title: 'My Docs',
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
-			sidebar: [
-				{
-					label: 'Guides',
-					items: [
-						// Each item here is one entry in the navigation menu.
-						{ label: 'Example Guide', slug: 'guides/example' },
-					],
-				},
-				{
-					label: 'Reference',
-					autogenerate: { directory: 'reference' },
-				},
-			],
-		}),
-	],
+  site: 'https://gridine644-ops.github.io',
+  base: '/klino-wiki',
+ integrations: [
+  starlight({
+   title: 'Эхо Безликих',
+   defaultLocale: 'ru',
+   customCss: ['./src/styles/custom.css'],
+   sidebar: [
+    {
+     label: 'Главная',
+     items: [
+      { label: 'О вселенной', slug: 'index' },
+     ],
+    },
+    {
+     label: 'Персонажи',
+     autogenerate: { directory: 'characters' },
+    },
+    {
+     label: 'Локации',
+     autogenerate: { directory: 'locations' },
+    },
+    {
+     label: 'Лор',
+     autogenerate: { directory: 'lore' },
+    },
+   ],
+  }),
+ ],
 });
