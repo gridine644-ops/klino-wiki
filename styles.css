@@ -753,6 +753,38 @@ h1 {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
+.crew-showcase {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.crew-showcase img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.crew-showcase-copy {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.crew-showcase-copy h3 {
+  margin: 0;
+}
+
+.crew-showcase-copy p {
+  margin: 0;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
 .crew-card {
   position: relative;
   border-radius: var(--radius-lg);
@@ -822,7 +854,8 @@ h1 {
   .story-shell,
   .ship-grid,
   .rank-layout,
-  .hero-grid {
+  .hero-grid,
+  .crew-showcase {
     grid-template-columns: 1fr;
   }
 

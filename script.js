@@ -403,7 +403,7 @@ function renderFocusCharacterStrip() {
 
       return `
         <button class="focus-character-button" type="button" data-character-id="${escapeAttribute(character.id)}">
-          <img src="${escapeAttribute(character.portrait)}" alt="${escapeAttribute(character.name)}" />
+          <img src="${escapeAttribute(character.spotlightPortrait || character.portrait)}" alt="${escapeAttribute(character.name)}" />
           <span>
             <strong>${escapeHtml(character.name)}</strong>
             <small>${escapeHtml(character.role)}</small>
@@ -642,7 +642,7 @@ function updateSpeakerSpotlight() {
 
   elements.speakerSpotlight.innerHTML = `
     <div class="spotlight-card">
-      <img src="${escapeAttribute(character.portrait)}" alt="${escapeAttribute(character.name)}" />
+      <img src="${escapeAttribute(character.spotlightPortrait || character.portrait)}" alt="${escapeAttribute(character.name)}" />
       <div>
         <small class="subtitle-label">Фокус персонажа</small>
         <h3>${escapeHtml(character.name)}</h3>

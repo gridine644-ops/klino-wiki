@@ -8,6 +8,7 @@
     "status": "Активен",
     "deck": "Командный мостик",
     "portrait": "assets/images/ironcrest-card.png",
+    "spotlightPortrait": "assets/images/ironcrest-close.png",
     "accent": "#8bb8ff",
     "summary": "Старший офицер «Эгиды Авангарда», который держит экипаж в строю не харизмой, а выдержкой, ясными приказами и тяжёлой личной ответственностью.",
     "temperament": [
@@ -34,6 +35,7 @@
     "status": "Активна",
     "deck": "Полётная палуба",
     "portrait": "assets/images/arclance-card.png",
+    "spotlightPortrait": "assets/images/arclance-close.png",
     "accent": "#79d7ff",
     "summary": "Самая нетерпеливая искра в составе корабля. Ей тесно в затяжной скрытности, и каждый новый вылет для неё — шанс снова почувствовать настоящую скорость войны.",
     "temperament": [
@@ -59,6 +61,7 @@
     "status": "Активен",
     "deck": "Инженерный сектор",
     "portrait": "assets/images/rivetlock-card.png",
+    "spotlightPortrait": "assets/images/rivetlock-close.png",
     "accent": "#ffbd5a",
     "summary": "Главный ремонтник «Эгиды». Он ворчит на всё, что движется, но именно его упрямство не позволяет кораблю развалиться после десятилетий автономной службы.",
     "temperament": [
@@ -84,6 +87,7 @@
     "status": "Активна",
     "deck": "Связной модуль",
     "portrait": "assets/images/pulseveil-card.png",
+    "spotlightPortrait": "assets/images/pulseveil-close.png",
     "accent": "#5cf4ff",
     "summary": "Тонкая, внимательная и почти бесшумная в работе. Для Pulseveil космос — это не пустота, а огромный слой шёпота, из которого можно вытащить правду.",
     "temperament": [
@@ -109,6 +113,7 @@
     "status": "Активен",
     "deck": "Тактический контур",
     "portrait": "assets/images/vectorrail-card.png",
+    "spotlightPortrait": "assets/images/vectorrail-card.png",
     "accent": "#9dc3ff",
     "summary": "Аналитик корабля и главный оппонент излишнего риска. Vectorrail не лишён верности, но всегда требует, чтобы вера проходила через расчёт.",
     "temperament": [
@@ -134,6 +139,7 @@
     "status": "Активна",
     "deck": "Ядро и энергонные кольца",
     "portrait": "assets/images/aetheris-card.png",
+    "spotlightPortrait": "assets/images/aetheris-close.png",
     "accent": "#70d5ff",
     "summary": "Следит за сердцем корабля так, будто слушает не механизмы, а живой организм. В её спокойствии есть почти ритуальная тишина.",
     "temperament": [
@@ -159,6 +165,7 @@
     "status": "Активна",
     "deck": "Медицинский сектор",
     "portrait": "assets/images/lifeline-card.png",
+    "spotlightPortrait": "assets/images/lifeline-close.png",
     "accent": "#7ef2dd",
     "summary": "Сохраняет экипаж не лаской, а точностью. Lifeline умеет быть мягкой ровно до того момента, когда промедление начинает стоить искр.",
     "temperament": [
@@ -184,6 +191,7 @@
     "status": "Активен",
     "deck": "Ангарные палубы",
     "portrait": "assets/images/gantry-card.png",
+    "spotlightPortrait": "assets/images/gantry-close.png",
     "accent": "#ffa768",
     "summary": "Знает ангарные палубы, лифты, захваты и стыковочные хребты лучше любых схем. Его сила — в организованной рабочей рутине, которая не даёт хаосу подняться с пола.",
     "temperament": [
@@ -209,6 +217,7 @@
     "status": "Активен",
     "deck": "Периметр и охрана",
     "portrait": "assets/images/bastion-card.png",
+    "spotlightPortrait": "assets/images/bastion-close.png",
     "accent": "#98b8ff",
     "summary": "Тяжёлый защитник и почти неподвижная опора внутренней безопасности. Bastion редко говорит больше нужного, но его молчание само по себе работает как предупреждение.",
     "temperament": [
