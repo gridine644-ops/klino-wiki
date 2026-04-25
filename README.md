@@ -1,49 +1,240 @@
-# Starlight Starter Kit: Basics
+# Aegis Vanguard / Эгида Авангарда
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+Интерактивный фан-лоре сайт во вселенной `Transformers: Prime` о затерянном автоботском корабле `Aegis Vanguard`. Проект собран как статический фронтенд с JSON-данными, интерактивными главами, карточками экипажа, корабельными секторами, журналом миссии и локальным слоем TTS.
 
+## Что внутри
+
+- `index.html` — каркас сайта, секции истории, экипажа, голосов, карты корабля и журнала.
+- `styles.css` — визуальный стиль: тёмный графит, бело-серебряные панели, синие энергонные линии, красные акценты.
+- `script.js` — загрузка JSON, навигация по главам и сценам, управление озвучкой, субтитрами и fallback на `SpeechSynthesis`.
+- `data/story.json` — главы, сцены, narratorText, реплики, пути к аудио, лог миссии и разделы корабля.
+- `data/characters.json` — профили персонажей, роли, альт-режимы, характеры, цитаты и изображения.
+- `data/voiceProfiles.json` — голосовые архетипы, OpenAI/ElevenLabs-настройки и browser fallback.
+- `assets/images/` — визуалы корабля, интерьеров и карточек персонажей.
+- `assets/audio/` — заранее сгенерированные аудиофайлы реплик. Папка пустая по умолчанию.
+- `package.json` — Node.js-скрипт для генерации аудио.
+- `scripts/generate-audio.js` — генератор mp3 через OpenAI TTS или ElevenLabs TTS.
+- `.env.example` — пример переменных окружения для локальной генерации аудио.
+
+## Как открыть сайт локально
+
+Сайт лучше запускать через локальный сервер. Если просто открыть `index.html` двойным кликом, браузер может заблокировать загрузку JSON-файлов.
+
+### Вариант 1: через Python
+
+```bash
+python -m http.server 8000
 ```
-npm create astro@latest -- --template starlight
+
+После этого откройте:
+
+`http://localhost:8000`
+
+### Вариант 2: любой статический сервер
+
+Подойдёт VS Code Live Server, `npx serve`, `http-server` или любой другой локальный static server.
+
+## Как работает озвучка
+
+На сайте используется трёхуровневая логика:
+
+1. Если для реплики уже существует файл в `assets/audio/`, проигрывается он.
+2. Если файла нет, сайт пытается использовать браузерный `SpeechSynthesis`.
+3. Если нужно подготовить нормальные mp3 заранее, используйте `scripts/generate-audio.js`.
+
+Глобальная кнопка `Озвучка: включена/выключена` отключает и локальные файлы, и browser fallback.
+
+## Как включить browser fallback
+
+Ничего дополнительно устанавливать не нужно. Если в браузере доступен `SpeechSynthesis`, сайт автоматически использует его для реплик без готовых аудиофайлов.
+
+Что можно настроить прямо в интерфейсе:
+
+- выбрать персонажа для теста;
+- выбрать доступный голос браузера;
+- проиграть тестовую фразу;
+- в разделе `Голоса персонажей` вставить свой текст и проверить подачу.
+
+Если у браузера нет русских голосов, fallback всё равно попытается прочитать реплику, но качество и акцент будут зависеть от установленных системных голосов.
+
+## Как добавить API-ключ
+
+1. Скопируйте `.env.example` в `.env`.
+2. Вставьте ключи только в `.env`, не в клиентский код.
+
+Пример:
+
+```env
+OPENAI_API_KEY=your_openai_key_here
+ELEVENLABS_API_KEY=your_elevenlabs_key_here
+TTS_PROVIDER=openai
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Поддерживаемые значения `TTS_PROVIDER`:
 
-## 🚀 Project Structure
+- `openai`
+- `elevenlabs`
 
-Inside of your Astro + Starlight project, you'll see the following folders and files:
+## Как сгенерировать аудио
 
-```
-.
-├── public/
-├── src/
-│   ├── assets/
-│   ├── content/
-│   │   └── docs/
-│   └── content.config.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
+Убедитесь, что установлен Node.js `18+`.
+
+Запуск:
+
+```bash
+npm run generate:audio
 ```
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+Если PowerShell блокирует `npm.ps1`, запустите скрипт напрямую:
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+```bash
+node scripts/generate-audio.js
+```
 
-Static assets, like favicons, can be placed in the `public/` directory.
+Скрипт:
 
-## 🧞 Commands
+- читает `data/story.json`;
+- читает `data/voiceProfiles.json`;
+- проходит по всем репликам;
+- пропускает файлы, которые уже существуют;
+- генерирует только отсутствующие mp3;
+- сохраняет их в `assets/audio/`;
+- продолжает работу, даже если одна отдельная реплика упала с ошибкой.
 
-All commands are run from the root of the project, from a terminal:
+## OpenAI TTS
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+По умолчанию OpenAI-профили уже заведены в `data/voiceProfiles.json`. Для каждого персонажа указан:
 
-## 👀 Want to learn more?
+- `model`
+- `voice`
+- `instructions`
 
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+Если хотите изменить стиль генерации, правьте именно эти поля.
+
+## ElevenLabs TTS
+
+Для ElevenLabs в `data/voiceProfiles.json` уже есть:
+
+- `modelId`
+- `voiceSettings`
+- `setupHint`
+
+Важно:
+
+- поле `voiceId` у персонажей оставлено пустым намеренно;
+- вы должны подставить свои собственные `voiceId` от оригинальных голосов;
+- не используйте голоса, имитирующие канонических персонажей или официальных актёров франшизы.
+
+После заполнения `voiceId` переключите:
+
+```env
+TTS_PROVIDER=elevenlabs
+```
+
+## Как добавить нового персонажа
+
+1. Добавьте объект в `data/characters.json`.
+2. Добавьте профиль в `data/voiceProfiles.json` с тем же `id`.
+3. Положите портрет в `assets/images/`.
+4. Если у персонажа есть реплики, используйте его `speakerId` в `data/story.json`.
+
+Минимально нужны:
+
+- `id`
+- `name`
+- `role`
+- `portrait`
+- `sampleLine`
+
+## Как добавить новую главу
+
+1. Откройте `data/story.json`.
+2. В массив `chapters` добавьте новую главу со структурой:
+
+```json
+{
+  "chapterId": "chapter_08",
+  "title": "Новая глава",
+  "introText": "Краткое описание главы.",
+  "scenes": [
+    {
+      "sceneId": "chapter_08_scene_01",
+      "title": "Сцена",
+      "narratorText": "Описание сцены.",
+      "backgroundImage": "assets/images/bridge.png",
+      "musicMood": "tense",
+      "dialogue": [
+        {
+          "speakerId": "ironcrest",
+          "emotion": "controlled",
+          "text": "Текст реплики.",
+          "audioFile": "assets/audio/chapter_08_scene_01_ironcrest_01.mp3"
+        }
+      ]
+    }
+  ]
+}
+```
+
+3. При необходимости добавьте запись в `missionLog`.
+4. Если для новой главы нужен готовый mp3, снова запустите:
+
+```bash
+npm run generate:audio
+```
+
+## Как поменять голос персонажа
+
+Откройте `data/voiceProfiles.json`.
+
+Для OpenAI меняются:
+
+- `openai.voice`
+- `openai.instructions`
+
+Для browser fallback меняются:
+
+- `browser.lang`
+- `browser.rate`
+- `browser.pitch`
+
+Для ElevenLabs меняются:
+
+- `elevenlabs.voiceId`
+- `elevenlabs.modelId`
+- `elevenlabs.voiceSettings`
+
+## Почему нельзя копировать официальные голоса
+
+Проект специально разделяет:
+
+- атмосферу франшизы;
+- оригинальные архетипы голосов;
+- и запрет на имитацию узнаваемых канонических исполнений.
+
+Причины простые:
+
+- это безопаснее с точки зрения авторских и личностных прав;
+- это делает персонажей сайта самостоятельными;
+- это помогает строить новый фан-лор, а не подменять официальных актёров и канонические версии героев.
+
+Хороший ориентир:
+
+- `командир`
+- `тактик`
+- `пилот`
+- `разведчица`
+- `инженер`
+- `медик`
+
+Плохой ориентир:
+
+- “сделай как Оптимус”
+- “сделай как Мегатрон”
+- “скопируй голос актёра из сериала”
+
+## Примечания
+
+- Сайт не делает live-запросы к TTS API из браузера.
+- API-ключи не должны попадать в `script.js`, `index.html` или другие клиентские файлы.
+- `Aegis Vanguard` не задуман как “самые сильные автоботы во вселенной”; история держится на долге, усталости, выживании и возвращении из забвения.

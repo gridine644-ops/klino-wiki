@@ -1,17 +1,13 @@
 {
-  "name": "echo-wiki",
+  "name": "aegis-vanguard-story-site",
+  "version": "1.0.0",
+  "private": true,
   "type": "module",
-  "version": "0.0.1",
+  "description": "Interactive fan-lore site for the Aegis Vanguard crew in the atmosphere of Transformers: Prime.",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "generate:audio": "node scripts/generate-audio.js"
   },
-  "dependencies": {
-    "@astrojs/starlight": "^0.38.2",
-    "astro": "^6.0.1",
-    "sharp": "^0.34.2"
+  "engines": {
+    "node": ">=18.0.0"
   }
 }

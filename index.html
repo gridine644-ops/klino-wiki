@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aegis Vanguard / Эгида Авангарда</title>
+    <meta
+      name="description"
+      content="Интерактивная фан-история во вселенной Transformers: Prime о затерянном корабле автоботов «Эгида Авангарда»."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#heroSection">
+          <span class="brand-mark"></span>
+          <span class="brand-copy">
+            <strong>Aegis Vanguard</strong>
+            <small>Эгида Авангарда</small>
+          </span>
+        </a>
+
+        <nav class="topnav" aria-label="Основная навигация">
+          <a href="#storySection">История</a>
+          <a href="#shipSection">Корабль</a>
+          <a href="#crewSection">Экипаж</a>
+          <a href="#voicesSection">Голоса</a>
+          <a href="#journalSection">Журнал</a>
+        </nav>
+
+        <button id="voiceToggleBtn" class="toggle-button" type="button" aria-pressed="true">
+          Озвучка: включена
+        </button>
+      </header>
+
+      <main>
+        <section id="heroSection" class="hero-section">
+          <div class="hero-backdrop"></div>
+          <div class="hero-grid">
+            <div class="hero-copy cinematic-panel">
+              <p class="eyebrow">Transformers: Prime fan lore interface</p>
+              <h1>Aegis Vanguard / Эгида Авангарда</h1>
+              <p id="heroLogline" class="hero-logline">
+                Потерянный корабль-носитель автоботов пережил войну в тишине дальнего сектора и
+                теперь должен решить, стоит ли возвращаться к тем, кто почти забыл о нём.
+              </p>
+              <div class="hero-actions">
+                <button id="heroStartBtn" class="primary-button" type="button">Начать историю</button>
+                <button id="heroCrewBtn" class="secondary-button" type="button">Экипаж</button>
+                <button id="heroJournalBtn" class="secondary-button" type="button">Журнал миссии</button>
+              </div>
+              <div class="hero-note">
+                Озвучка построена на оригинальных архетипах и не имитирует официальные голоса
+                актёров или канонических персонажей.
+              </div>
+            </div>
+
+            <aside class="hero-status cinematic-panel">
+              <h2>Статус корабля</h2>
+              <div class="status-grid">
+                <article class="status-card">
+                  <span class="status-label">Активный экипаж</span>
+                  <strong id="activeCount">487</strong>
+                </article>
+                <article class="status-card">
+                  <span class="status-label">В восстановлении</span>
+                  <strong id="recoveringCount">71</strong>
+                </article>
+                <article class="status-card">
+                  <span class="status-label">Стазис</span>
+                  <strong id="stasisCount">93</strong>
+                </article>
+                <article class="status-card status-card-wide">
+                  <span class="status-label">Текущий сектор</span>
+                  <strong id="shipLocation">Нулевой Рукав</strong>
+                </article>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section id="storySection" class="content-section">
+          <div class="section-heading">
+            <p class="eyebrow">Story Console</p>
+            <h2>Главы и сцены</h2>
+            <p>
+              Кинематографичная история разворачивается по главам. Каждая сцена содержит
+              повествование, реплики, субтитры и локальное управление озвучкой.
+            </p>
+          </div>
+
+          <div class="story-shell">
+            <aside class="chapter-rail cinematic-panel">
+              <div class="rail-heading">
+                <h3>Глава</h3>
+                <span id="chapterCounter">1 / 7</span>
+              </div>
+              <div id="chapterRail" class="chapter-rail-list"></div>
+            </aside>
+
+            <div class="story-main cinematic-panel">
+              <div class="scene-visual">
+                <img id="sceneBackground" src="assets/images/bridge.png" alt="Сцена истории" />
+                <div class="scene-overlay">
+                  <span id="sceneMood" class="scene-mood">mood</span>
+                  <h3 id="chapterTitle">Первый приказ</h3>
+                  <p id="sceneTitle" class="scene-title">Шифр, который нельзя потерять</p>
+                </div>
+              </div>
+
+              <div class="story-toolbar">
+                <button id="prevSceneBtn" class="secondary-button compact-button" type="button">
+                  Предыдущая сцена
+                </button>
+                <div id="sceneTabs" class="scene-tabs" aria-label="Сцены главы"></div>
+                <button id="nextSceneBtn" class="secondary-button compact-button" type="button">
+                  Следующая сцена
+                </button>
+              </div>
+
+              <div class="chapter-copy">
+                <p id="chapterIntro" class="chapter-intro"></p>
+                <p id="sceneNarrator" class="scene-narrator"></p>
+              </div>
+
+              <div id="subtitlePanel" class="subtitle-panel" aria-live="polite">
+                <span class="subtitle-label">Субтитры</span>
+                <strong id="subtitleSpeaker">Ожидание</strong>
+                <p id="subtitleText">
+                  Выберите реплику ниже или включите тест голоса, чтобы услышать персонажей.
+                </p>
+                <span id="subtitleSource" class="subtitle-source">Источник: standby</span>
+              </div>
+
+              <div class="dialogue-header">
+                <div>
+                  <h3>Реплики сцены</h3>
+                  <p id="dialogueProgressLabel">Активная реплика: нет</p>
+                </div>
+                <span id="playbackStatus" class="playback-status">Озвучка ожидает</span>
+              </div>
+              <div id="dialogueList" class="dialogue-list"></div>
+            </div>
+
+            <aside class="story-side">
+              <div id="speakerSpotlight" class="cinematic-panel spotlight-panel"></div>
+              <div class="cinematic-panel inline-tester">
+                <div class="rail-heading">
+                  <h3>Тест fallback-голоса</h3>
+                  <span>SpeechSynthesis</span>
+                </div>
+                <label class="field">
+                  <span>Персонаж</span>
+                  <select id="voiceCharacterSelect"></select>
+                </label>
+                <label class="field">
+                  <span>Голос браузера</span>
+                  <select id="browserVoiceSelect">
+                    <option value="">Автовыбор</option>
+                  </select>
+                </label>
+                <button id="voiceTestBtn" class="primary-button compact-button" type="button">
+                  Проиграть тест
+                </button>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section id="shipSection" class="content-section">
+          <div class="section-heading">
+            <p class="eyebrow">Ship Layout</p>
+            <h2>Разделы корабля</h2>
+            <p>
+              «Эгида Авангарда» ощущается не как трофей и не как город, а как строгая автономная
+              военная система, где каждый сектор удерживает часть общей памяти и выживания.
+            </p>
+          </div>
+
+          <div class="ship-grid">
+            <div id="shipSectionCards" class="ship-section-cards"></div>
+            <article id="shipSectionDetail" class="cinematic-panel ship-section-detail"></article>
+          </div>
+        </section>
+
+        <section id="crewSection" class="content-section">
+          <div class="section-heading">
+            <p class="eyebrow">Crew Manifest</p>
+            <h2>Экипаж</h2>
+            <p>
+              Основной костяк корабля держится на девяти офицерах и специалистах. Каждый из них
+              отвечает не только за свой сектор, но и за то, чтобы приказ не распался под весом лет.
+            </p>
+          </div>
+          <div id="crewGrid" class="crew-grid"></div>
+        </section>
+
+        <section id="voicesSection" class="content-section">
+          <div class="section-heading">
+            <p class="eyebrow">Voice Profiles</p>
+            <h2>Голоса персонажей</h2>
+            <p>
+              Архетипы собраны так, чтобы передавать характеры экипажа, не копируя официальные
+              исполнение и интонации франшизы. Если локального аудиофайла нет, сайт говорит через
+              браузерный синтез речи.
+            </p>
+          </div>
+
+          <div class="voices-layout">
+            <div id="voiceProfileGrid" class="voice-profile-grid"></div>
+            <div class="cinematic-panel voice-test-panel">
+              <div class="rail-heading">
+                <h3>Ручной тест</h3>
+                <span>Browser / local TTS</span>
+              </div>
+              <label class="field">
+                <span>Текст для пробы</span>
+                <textarea id="voiceSampleText" rows="6"></textarea>
+              </label>
+              <div class="voice-test-actions">
+                <button id="playCustomSampleBtn" class="primary-button compact-button" type="button">
+                  Проиграть текст
+                </button>
+                <button id="stopPlaybackBtn" class="secondary-button compact-button" type="button">
+                  Остановить
+                </button>
+              </div>
+              <p class="voice-disclaimer">
+                Для генерации mp3 заранее используйте локальный Node.js-скрипт. API-ключи никогда
+                не отправляются из браузера.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="journalSection" class="content-section">
+          <div class="section-heading">
+            <p class="eyebrow">Mission Log</p>
+            <h2>Журнал миссии</h2>
+            <p>
+              Краткий маршрут корабля от секретного приказа до первого ответа на Землю. Каждый
+              журнал можно использовать как быстрый вход в нужную главу истории.
+            </p>
+          </div>
+          <div id="missionLog" class="mission-log"></div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <p>
+          Фан-проект по мотивам атмосферы Transformers: Prime. Озвучка сайта строится на
+          оригинальных голосовых архетипах и не предназначена для имитации официальных актёров или
+          канонических персонажей.
+        </p>
+      </footer>
+    </div>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
