@@ -42,13 +42,13 @@
                 теперь должен решить, стоит ли возвращаться к тем, кто почти забыл о нём.
               </p>
               <div class="hero-actions">
-                <button id="heroStartBtn" class="primary-button" type="button">Начать историю</button>
+                <button id="heroStartBtn" class="primary-button" type="button">Открыть историю</button>
                 <button id="heroCrewBtn" class="secondary-button" type="button">Офицеры</button>
                 <button id="heroJournalBtn" class="secondary-button" type="button">Журнал миссии</button>
               </div>
               <div class="hero-note">
-                Текущая версия сайта работает без озвучки и делает упор на текст, сцены, палубы
-                корабля и визуальный лор экипажа.
+                На сайте интегрирован полный текст обновлённой истории без сокращений. Основной
+                акцент сделан на чтении глав, палубах корабля, офицерах и живом составе экипажа.
               </div>
             </div>
 
@@ -78,18 +78,18 @@
 
         <section id="storySection" class="content-section">
           <div class="section-heading">
-            <p class="eyebrow">Story Console</p>
-            <h2>Главы и сцены</h2>
+            <p class="eyebrow">Story Reader</p>
+            <h2>Полная история по главам</h2>
             <p>
-              История раскрывается через главы, сценические описания и диалоги. В центре — не
-              аудиоэффект, а атмосфера потерянного автоботского корабля, который слишком долго жил
-              в тишине.
+              Эта версия сайта читает полный обновлённый текст, а не короткий пересказ. Каждая
+              глава раскрывается через внутренние разделы, ключевых персонажей и досье по состоянию
+              корабля в конкретный момент истории.
             </p>
           </div>
 
           <div class="story-shell">
             <aside class="chapter-rail cinematic-panel">
-              <div class="rail-heading">
+              <div class="panel-heading">
                 <h3>Глава</h3>
                 <span id="chapterCounter">1 / 7</span>
               </div>
@@ -98,36 +98,46 @@
 
             <div class="story-main cinematic-panel">
               <div class="scene-visual">
-                <img id="sceneBackground" src="assets/images/bridge.png" alt="Сцена истории" />
+                <img id="sceneBackground" src="assets/images/bridge.png" alt="Глава истории" />
                 <div class="scene-overlay">
                   <span id="sceneMood" class="scene-mood">mood</span>
-                  <h3 id="chapterTitle">Первый приказ</h3>
-                  <p id="sceneTitle" class="scene-title">Шифр, который нельзя потерять</p>
+                  <h3 id="chapterTitle">Глава первая. Завет</h3>
+                  <p id="sceneTitle" class="scene-title">Тайный протокол исхода</p>
                 </div>
               </div>
 
               <div class="story-toolbar">
-                <button id="prevSceneBtn" class="secondary-button compact-button" type="button">
-                  Предыдущая сцена
+                <button id="prevChapterBtn" class="secondary-button compact-button" type="button">
+                  Предыдущая глава
                 </button>
-                <div id="sceneTabs" class="scene-tabs" aria-label="Сцены главы"></div>
-                <button id="nextSceneBtn" class="secondary-button compact-button" type="button">
-                  Следующая сцена
+                <div id="chapterStats" class="chapter-stats" aria-label="Статистика чтения"></div>
+                <button id="nextChapterBtn" class="secondary-button compact-button" type="button">
+                  Следующая глава
                 </button>
               </div>
 
               <div class="chapter-copy">
                 <p id="chapterIntro" class="chapter-intro"></p>
-                <p id="sceneNarrator" class="scene-narrator"></p>
+                <div id="chapterMeta" class="meta-chip-row"></div>
               </div>
 
-              <div class="dialogue-header">
+              <div class="panel-heading panel-heading-stack">
                 <div>
-                  <h3>Реплики сцены</h3>
-                  <p id="dialogueProgressLabel">Активная реплика: нет</p>
+                  <h3>Ключевые фигуры главы</h3>
+                  <p id="focusLabel">Кто сильнее всего чувствуется в тексте этой главы</p>
                 </div>
               </div>
-              <div id="dialogueList" class="dialogue-list"></div>
+              <div id="focusCharacterStrip" class="focus-character-strip"></div>
+
+              <div class="panel-heading panel-heading-stack">
+                <div>
+                  <h3>Разделы главы</h3>
+                  <p id="sectionProgressLabel">Активный раздел: I.</p>
+                </div>
+              </div>
+              <div id="sectionTabs" class="section-tabs" aria-label="Разделы главы"></div>
+
+              <article id="storyReader" class="story-reader" aria-live="polite"></article>
             </div>
 
             <aside class="story-side">
@@ -144,7 +154,7 @@
             <p>
               «Эгида Авангарда» должна ощущаться как огромный автоботский носитель: строгий,
               светлый, функциональный и военный, но не пустой. Корабль сам по себе — отдельный
-              персонаж.
+              персонаж, и внутри него должна чувствоваться жизнь.
             </p>
           </div>
 
@@ -179,13 +189,16 @@
 
           <div class="rank-layout">
             <article class="cinematic-panel rank-visual-panel">
-              <img src="assets/images/crew-lineup.png" alt="Рядовой состав автоботов на борту Эгиды Авангарда" />
+              <img
+                src="assets/images/crew-lineup.png"
+                alt="Рядовой состав автоботов на борту Эгиды Авангарда"
+              />
               <div class="rank-visual-copy">
                 <h3>Основной состав корабля</h3>
                 <p>
-                  Именно эти боты создают ощущение живого корабля: не одинокий мостик с командирами,
-                  а настоящий автономный носитель, на котором есть рабочая рутина, смены, логистика,
-                  охрана и постоянное техническое напряжение.
+                  Именно эти боты создают ощущение живого корабля: не одинокий мостик с
+                  командирами, а настоящий автономный носитель, на котором есть рабочая рутина,
+                  смены, логистика, охрана и постоянное техническое напряжение.
                 </p>
               </div>
             </article>
@@ -208,8 +221,8 @@
 
       <footer class="footer">
         <p>
-          Фан-проект по мотивам атмосферы Transformers: Prime. Текущая версия сайта собрана без
-          голосового слоя и сосредоточена на визуальном лоре, структуре корабля и драме экипажа.
+          Фан-проект по мотивам атмосферы Transformers: Prime. Сайт собран как интерактивный ридер
+          полного текста истории, расширенный лором корабля, офицеров и рядового экипажа.
         </p>
       </footer>
     </div>

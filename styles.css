@@ -2,6 +2,7 @@
   --bg: #070c14;
   --bg-soft: #0d1522;
   --panel: rgba(14, 21, 34, 0.86);
+  --panel-strong: rgba(10, 16, 28, 0.94);
   --line: rgba(126, 202, 255, 0.22);
   --line-strong: rgba(126, 202, 255, 0.42);
   --text: #edf5ff;
@@ -11,6 +12,7 @@
   --accent-strong: #94ddff;
   --silver: #dbe6f4;
   --success: #7ef2dd;
+  --warning: #ff7f8f;
   --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
   --radius-lg: 28px;
   --radius-md: 20px;
@@ -121,6 +123,7 @@ a {
 h1,
 h2,
 h3,
+h4,
 .primary-button,
 .secondary-button {
   font-family: var(--font-display);
@@ -197,6 +200,13 @@ h3,
   border-color: var(--line-strong);
 }
 
+.primary-button:disabled,
+.secondary-button:disabled {
+  opacity: 0.45;
+  cursor: default;
+  transform: none;
+}
+
 .hero-section,
 .content-section,
 .footer {
@@ -213,8 +223,9 @@ h3,
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(110deg, rgba(4, 10, 18, 0.95) 10%, rgba(4, 10, 18, 0.42) 55%, rgba(4, 10, 18, 0.88) 100%),
-    url("assets/images/ship-overview.png") center/cover no-repeat;
+    linear-gradient(110deg, rgba(4, 10, 18, 0.96) 12%, rgba(4, 10, 18, 0.52) 56%, rgba(4, 10, 18, 0.9) 100%),
+    radial-gradient(circle at 76% 34%, rgba(104, 190, 255, 0.12), transparent 26%),
+    url("assets/images/ship-overview.png") right center / contain no-repeat;
   border-radius: clamp(1.6rem, 3vw, 2.4rem);
   box-shadow: var(--shadow);
   overflow: hidden;
@@ -327,11 +338,15 @@ h1 {
 
 .status-label,
 .subtitle-label,
-.dialogue-meta span,
 .crew-meta span,
 .rank-crew-card small,
 .mission-log-card small,
-.log-status {
+.log-status,
+.chapter-inline-meta,
+.meta-chip small,
+.stat-pill small,
+.focus-character-button small,
+.reader-section-heading span {
   color: var(--text-soft);
   font-size: 0.78rem;
   text-transform: uppercase;
@@ -347,7 +362,7 @@ h1 {
 }
 
 .section-heading p:last-child {
-  max-width: 72ch;
+  max-width: 76ch;
   color: var(--text-dim);
   font-size: 1.08rem;
   margin-bottom: 0;
@@ -360,13 +375,8 @@ h1 {
   align-items: start;
 }
 
-.story-side {
-  display: grid;
-  gap: 1rem;
-}
-
-.chapter-rail,
 .story-main,
+.chapter-rail,
 .spotlight-panel,
 .lore-panel,
 .ship-section-detail,
@@ -374,39 +384,50 @@ h1 {
   padding: 1rem;
 }
 
-.rail-heading,
-.dialogue-header {
+.story-main,
+.story-side {
+  display: grid;
+  gap: 1rem;
+}
+
+.panel-heading {
   display: flex;
   align-items: start;
   justify-content: space-between;
   gap: 1rem;
 }
 
-.rail-heading h3,
-.dialogue-header h3 {
+.panel-heading-stack {
+  margin-top: 0.2rem;
+}
+
+.panel-heading h3 {
   margin: 0;
 }
 
-.rail-heading span,
-.dialogue-header p {
+.panel-heading span,
+.panel-heading p {
   color: var(--text-soft);
   font-size: 0.92rem;
+  margin: 0;
 }
 
 .chapter-rail-list,
-.scene-tabs,
 .ship-section-cards,
 .crew-grid,
 .mission-log,
-.rank-crew-grid {
+.rank-crew-grid,
+.focus-character-strip,
+.section-tabs {
   display: grid;
   gap: 0.85rem;
 }
 
 .chapter-button,
-.scene-tab,
 .ship-section-card,
-.mission-log-card {
+.mission-log-card,
+.section-tab,
+.focus-character-button {
   width: 100%;
   text-align: left;
   background: rgba(255, 255, 255, 0.03);
@@ -419,29 +440,38 @@ h1 {
 }
 
 .chapter-button:hover,
-.scene-tab:hover,
 .ship-section-card:hover,
 .mission-log-card:hover,
+.section-tab:hover,
+.focus-character-button:hover,
 .chapter-button:focus-visible,
-.scene-tab:focus-visible,
 .ship-section-card:focus-visible,
-.mission-log-card:focus-visible {
+.mission-log-card:focus-visible,
+.section-tab:focus-visible,
+.focus-character-button:focus-visible {
   transform: translateY(-1px);
   border-color: var(--line-strong);
 }
 
 .chapter-button.is-active,
-.scene-tab.is-active,
-.ship-section-card.is-active {
+.ship-section-card.is-active,
+.section-tab.is-active,
+.focus-character-button.is-active {
   border-color: rgba(126, 202, 255, 0.58);
   background: linear-gradient(135deg, rgba(104, 190, 255, 0.16), rgba(255, 255, 255, 0.03));
 }
 
 .chapter-button p,
 .ship-section-card p,
-.mission-log-card p {
-  margin: 0.25rem 0 0;
+.mission-log-card p,
+.section-tab p {
+  margin: 0.35rem 0 0;
   color: var(--text-dim);
+}
+
+.chapter-inline-meta {
+  display: inline-flex;
+  margin-top: 0.65rem;
 }
 
 .scene-visual {
@@ -449,19 +479,23 @@ h1 {
   min-height: 24rem;
   border-radius: var(--radius-lg);
   overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(9, 18, 30, 0.94), rgba(6, 11, 19, 0.98)),
+    radial-gradient(circle at top, rgba(104, 190, 255, 0.12), transparent 48%);
 }
 
 .scene-visual img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 0.9rem;
 }
 
 .scene-overlay {
   position: absolute;
   inset: auto 0 0 0;
   padding: 1.3rem;
-  background: linear-gradient(180deg, transparent, rgba(5, 10, 17, 0.92));
+  background: linear-gradient(180deg, transparent, rgba(5, 10, 17, 0.94));
 }
 
 .scene-mood {
@@ -487,97 +521,157 @@ h1 {
   grid-template-columns: auto minmax(0, 1fr) auto;
   gap: 0.8rem;
   align-items: center;
-  margin-top: 1rem;
 }
 
-.scene-tabs {
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+.chapter-stats,
+.meta-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.stat-pill,
+.meta-chip {
+  min-width: 0;
+  padding: 0.8rem 0.95rem;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  display: grid;
+  gap: 0.22rem;
+}
+
+.stat-pill strong,
+.meta-chip strong {
+  font-size: 1rem;
+  color: var(--silver);
 }
 
 .chapter-copy {
-  padding: 1rem 0 0.2rem;
+  display: grid;
+  gap: 0.85rem;
 }
 
 .chapter-intro {
   color: var(--silver);
-  font-size: 1.08rem;
+  font-size: 1.1rem;
+  line-height: 1.65;
+  margin: 0;
 }
 
-.scene-narrator {
-  margin-top: 0.75rem;
-  color: var(--text-dim);
-  line-height: 1.6;
+.focus-character-strip {
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
 }
 
-.dialogue-list {
-  margin-top: 0.85rem;
-}
-
-.dialogue-card {
+.focus-character-button {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 1rem;
-  padding: 1rem;
-  border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.028);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  cursor: pointer;
-  transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 0.8rem;
+  align-items: center;
+  padding: 0.75rem 0.8rem;
 }
 
-.dialogue-card + .dialogue-card {
-  margin-top: 0.8rem;
-}
-
-.dialogue-card:hover,
-.dialogue-card.is-active {
-  border-color: rgba(126, 202, 255, 0.62);
-  background: rgba(104, 190, 255, 0.09);
-}
-
-.dialogue-avatar {
-  width: 72px;
-  height: 92px;
-  border-radius: 18px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: linear-gradient(180deg, rgba(19, 31, 49, 0.95), rgba(7, 12, 20, 0.95));
-}
-
-.dialogue-avatar img {
-  width: 100%;
-  height: 100%;
+.focus-character-button img {
+  width: 56px;
+  height: 72px;
   object-fit: contain;
   padding: 0.2rem;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(19, 31, 49, 0.95), rgba(7, 12, 20, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.dialogue-body strong {
-  display: block;
-  font-size: 1.02rem;
+.focus-character-button span {
+  display: grid;
+  gap: 0.18rem;
 }
 
-.dialogue-meta {
-  display: flex;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-  margin-top: 0.3rem;
+.focus-character-button strong {
+  font-size: 0.95rem;
 }
 
-.dialogue-text {
-  margin: 0.6rem 0 0;
+.section-tabs {
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+.story-reader {
+  display: grid;
+  gap: 1rem;
+}
+
+.reader-section {
+  padding: 1.25rem 1.25rem 1.3rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(180deg, rgba(13, 20, 33, 0.98), rgba(9, 14, 24, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  scroll-margin-top: 7rem;
+}
+
+.reader-section.is-active {
+  border-color: rgba(126, 202, 255, 0.5);
+  box-shadow:
+    inset 0 0 0 1px rgba(126, 202, 255, 0.12),
+    0 0 0 1px rgba(126, 202, 255, 0.12);
+}
+
+.reader-section-heading {
+  display: grid;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.reader-section h4 {
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.reader-section p {
+  margin: 0;
+  color: var(--silver);
   font-size: 1.08rem;
-  line-height: 1.45;
+  line-height: 1.9;
+  max-width: 70ch;
+}
+
+.reader-section p + p,
+.reader-section blockquote + p,
+.reader-section p + blockquote,
+.reader-section blockquote + blockquote {
+  margin-top: 1rem;
+}
+
+.reader-section p:first-of-type::first-letter {
+  float: left;
+  font-size: 3.1rem;
+  line-height: 0.9;
+  padding-right: 0.35rem;
+  color: var(--accent-strong);
+  font-family: var(--font-display);
+}
+
+.reader-quote {
+  margin: 0;
+  padding: 1rem 1.1rem;
+  border-left: 3px solid rgba(126, 202, 255, 0.42);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--accent-strong);
+  font-style: italic;
+  line-height: 1.7;
+  max-width: 65ch;
 }
 
 .spotlight-panel,
 .lore-panel {
-  min-height: 20rem;
+  align-content: start;
 }
 
 .spotlight-card,
-.rank-visual-copy {
+.rank-visual-copy,
+.lore-state {
   display: grid;
-  gap: 1rem;
+  gap: 0.8rem;
 }
 
 .spotlight-card img,
@@ -596,16 +690,25 @@ h1 {
 .ship-section-card h3,
 .mission-log-card h3,
 .crew-card h3,
-.rank-crew-card h3 {
+.rank-crew-card h3,
+.lore-state h3,
+.ship-section-detail h3 {
   margin: 0;
 }
 
 .spotlight-card p,
 .rank-visual-copy p,
 .crew-card p,
-.rank-crew-card p {
+.rank-crew-card p,
+.ship-section-detail p,
+.lore-state p {
   margin: 0.3rem 0 0;
   color: var(--text-dim);
+}
+
+.lore-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(126, 202, 255, 0.25), transparent);
 }
 
 .ship-grid,
@@ -635,7 +738,6 @@ h1 {
 .crew-list {
   display: grid;
   gap: 0.5rem;
-  margin-top: 0.8rem;
 }
 
 .detail-list div,
@@ -698,7 +800,7 @@ h1 {
 }
 
 .rank-visual-panel {
-  padding: 1rem;
+  gap: 1rem;
 }
 
 .mission-log {
@@ -716,7 +818,7 @@ h1 {
   color: var(--text-soft);
 }
 
-@media (max-width: 1180px) {
+@media (max-width: 1240px) {
   .story-shell,
   .ship-grid,
   .rank-layout,
@@ -734,6 +836,17 @@ h1 {
   }
 }
 
+@media (max-width: 920px) {
+  .story-toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .chapter-stats,
+  .meta-chip-row {
+    justify-content: start;
+  }
+}
+
 @media (max-width: 760px) {
   .hero-copy {
     min-height: 24rem;
@@ -741,7 +854,9 @@ h1 {
 
   .status-grid,
   .ship-section-cards,
-  .rank-crew-grid {
+  .rank-crew-grid,
+  .focus-character-strip,
+  .section-tabs {
     grid-template-columns: 1fr;
   }
 
@@ -749,16 +864,17 @@ h1 {
     grid-column: span 1;
   }
 
-  .story-toolbar {
-    grid-template-columns: 1fr;
-  }
-
-  .dialogue-card {
-    grid-template-columns: 1fr;
-  }
-
   .topnav {
     gap: 0.7rem;
+  }
+
+  .reader-section {
+    padding: 1rem;
+  }
+
+  .reader-section p {
+    font-size: 1rem;
+    line-height: 1.75;
   }
 }
 
