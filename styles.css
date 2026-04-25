@@ -2,7 +2,6 @@
   --bg: #070c14;
   --bg-soft: #0d1522;
   --panel: rgba(14, 21, 34, 0.86);
-  --panel-strong: rgba(18, 26, 42, 0.95);
   --line: rgba(126, 202, 255, 0.22);
   --line-strong: rgba(126, 202, 255, 0.42);
   --text: #edf5ff;
@@ -10,9 +9,7 @@
   --text-soft: #6f849c;
   --accent: #68beff;
   --accent-strong: #94ddff;
-  --red: #ff5c65;
   --silver: #dbe6f4;
-  --gold: #ffbd70;
   --success: #7ef2dd;
   --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
   --radius-lg: 28px;
@@ -60,9 +57,7 @@ img {
   max-width: 100%;
 }
 
-button,
-select,
-textarea {
+button {
   font: inherit;
 }
 
@@ -126,7 +121,6 @@ a {
 h1,
 h2,
 h3,
-.toggle-button,
 .primary-button,
 .secondary-button {
   font-family: var(--font-display);
@@ -169,7 +163,6 @@ h3,
   transform: scaleX(1);
 }
 
-.toggle-button,
 .primary-button,
 .secondary-button {
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -179,7 +172,6 @@ h3,
   transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
 }
 
-.toggle-button,
 .secondary-button {
   color: var(--silver);
   background: rgba(255, 255, 255, 0.03);
@@ -197,10 +189,8 @@ h3,
   font-size: 0.82rem;
 }
 
-.toggle-button:hover,
 .primary-button:hover,
 .secondary-button:hover,
-.toggle-button:focus-visible,
 .primary-button:focus-visible,
 .secondary-button:focus-visible {
   transform: translateY(-1px);
@@ -335,9 +325,15 @@ h1 {
   grid-column: span 2;
 }
 
-.status-label {
+.status-label,
+.subtitle-label,
+.dialogue-meta span,
+.crew-meta span,
+.rank-crew-card small,
+.mission-log-card small,
+.log-status {
   color: var(--text-soft);
-  font-size: 0.84rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -351,7 +347,7 @@ h1 {
 }
 
 .section-heading p:last-child {
-  max-width: 70ch;
+  max-width: 72ch;
   color: var(--text-dim);
   font-size: 1.08rem;
   margin-bottom: 0;
@@ -364,12 +360,17 @@ h1 {
   align-items: start;
 }
 
+.story-side {
+  display: grid;
+  gap: 1rem;
+}
+
 .chapter-rail,
 .story-main,
 .spotlight-panel,
-.inline-tester,
+.lore-panel,
 .ship-section-detail,
-.voice-test-panel {
+.rank-visual-panel {
   padding: 1rem;
 }
 
@@ -387,8 +388,7 @@ h1 {
 }
 
 .rail-heading span,
-.dialogue-header p,
-.playback-status {
+.dialogue-header p {
   color: var(--text-soft);
   font-size: 0.92rem;
 }
@@ -397,8 +397,8 @@ h1 {
 .scene-tabs,
 .ship-section-cards,
 .crew-grid,
-.voice-profile-grid,
-.mission-log {
+.mission-log,
+.rank-crew-grid {
   display: grid;
   gap: 0.85rem;
 }
@@ -437,12 +437,11 @@ h1 {
   background: linear-gradient(135deg, rgba(104, 190, 255, 0.16), rgba(255, 255, 255, 0.03));
 }
 
-.chapter-button small,
-.scene-tab small,
-.mission-log-card small {
-  display: block;
-  color: var(--text-soft);
-  margin-bottom: 0.3rem;
+.chapter-button p,
+.ship-section-card p,
+.mission-log-card p {
+  margin: 0.25rem 0 0;
+  color: var(--text-dim);
 }
 
 .scene-visual {
@@ -496,7 +495,7 @@ h1 {
 }
 
 .chapter-copy {
-  padding: 1rem 0 0.5rem;
+  padding: 1rem 0 0.2rem;
 }
 
 .chapter-intro {
@@ -507,38 +506,7 @@ h1 {
 .scene-narrator {
   margin-top: 0.75rem;
   color: var(--text-dim);
-  line-height: 1.55;
-}
-
-.subtitle-panel {
-  border-radius: var(--radius-md);
-  padding: 1rem;
-  background:
-    linear-gradient(135deg, rgba(104, 190, 255, 0.1), rgba(255, 92, 101, 0.05)),
-    rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(126, 202, 255, 0.2);
-}
-
-.subtitle-label,
-.subtitle-source,
-.dialogue-meta span,
-.crew-meta span,
-.voice-meta span,
-.mission-log-card span {
-  color: var(--text-soft);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-size: 0.78rem;
-}
-
-.subtitle-panel strong {
-  display: block;
-  margin-top: 0.4rem;
-}
-
-.subtitle-panel p {
-  margin: 0.5rem 0;
-  font-size: 1.08rem;
+  line-height: 1.6;
 }
 
 .dialogue-list {
@@ -547,12 +515,13 @@ h1 {
 
 .dialogue-card {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr;
   gap: 1rem;
   padding: 1rem;
   border-radius: var(--radius-md);
   background: rgba(255, 255, 255, 0.028);
   border: 1px solid rgba(255, 255, 255, 0.07);
+  cursor: pointer;
   transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
 }
 
@@ -560,19 +529,26 @@ h1 {
   margin-top: 0.8rem;
 }
 
+.dialogue-card:hover,
 .dialogue-card.is-active {
   border-color: rgba(126, 202, 255, 0.62);
   background: rgba(104, 190, 255, 0.09);
-  transform: translateY(-1px);
 }
 
 .dialogue-avatar {
-  width: 68px;
-  height: 68px;
+  width: 72px;
+  height: 92px;
   border-radius: 18px;
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.03);
+  background: linear-gradient(180deg, rgba(19, 31, 49, 0.95), rgba(7, 12, 20, 0.95));
+}
+
+.dialogue-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0.2rem;
 }
 
 .dialogue-body strong {
@@ -590,66 +566,50 @@ h1 {
 .dialogue-text {
   margin: 0.6rem 0 0;
   font-size: 1.08rem;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
-.dialogue-play {
-  align-self: center;
+.spotlight-panel,
+.lore-panel {
+  min-height: 20rem;
 }
 
-.field {
-  display: grid;
-  gap: 0.45rem;
-  margin-top: 0.85rem;
-}
-
-.field span {
-  color: var(--text-soft);
-}
-
-select,
-textarea {
-  width: 100%;
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(3, 10, 18, 0.78);
-  color: var(--text);
-  padding: 0.82rem 0.9rem;
-}
-
-textarea {
-  resize: vertical;
-  min-height: 8rem;
-}
-
-.spotlight-panel {
-  min-height: 24rem;
-}
-
-.spotlight-card {
+.spotlight-card,
+.rank-visual-copy {
   display: grid;
   gap: 1rem;
 }
 
-.spotlight-card img {
+.spotlight-card img,
+.rank-visual-panel img {
   width: 100%;
-  aspect-ratio: 1 / 1.2;
-  object-fit: cover;
+  height: auto;
+  max-height: 520px;
+  object-fit: contain;
+  background: linear-gradient(180deg, rgba(19, 31, 49, 0.95), rgba(7, 12, 20, 0.95));
   border-radius: var(--radius-md);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.6rem;
 }
 
-.spotlight-card h3 {
+.spotlight-card h3,
+.ship-section-card h3,
+.mission-log-card h3,
+.crew-card h3,
+.rank-crew-card h3 {
   margin: 0;
 }
 
-.spotlight-card p {
+.spotlight-card p,
+.rank-visual-copy p,
+.crew-card p,
+.rank-crew-card p {
   margin: 0.3rem 0 0;
   color: var(--text-dim);
 }
 
 .ship-grid,
-.voices-layout {
+.rank-layout {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
   gap: 1rem;
@@ -660,28 +620,19 @@ textarea {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.ship-section-card h3,
-.mission-log-card h3 {
-  margin: 0.25rem 0 0.35rem;
-}
-
-.ship-section-card p,
-.mission-log-card p {
-  margin: 0;
-  color: var(--text-dim);
-}
-
 .ship-section-detail img {
   width: 100%;
-  height: 320px;
-  object-fit: cover;
+  height: auto;
+  max-height: 460px;
+  object-fit: contain;
+  background: linear-gradient(180deg, rgba(19, 31, 49, 0.95), rgba(7, 12, 20, 0.95));
   border-radius: var(--radius-md);
   margin-bottom: 1rem;
+  padding: 0.75rem;
 }
 
 .detail-list,
-.crew-list,
-.voice-list {
+.crew-list {
   display: grid;
   gap: 0.5rem;
   margin-top: 0.8rem;
@@ -689,7 +640,7 @@ textarea {
 
 .detail-list div,
 .crew-list div,
-.voice-list div {
+.rank-crew-card {
   padding: 0.72rem 0.85rem;
   border-radius: var(--radius-sm);
   background: rgba(255, 255, 255, 0.03);
@@ -700,14 +651,14 @@ textarea {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
-.crew-card,
-.voice-card {
+.crew-card {
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: linear-gradient(180deg, rgba(17, 26, 42, 0.96), rgba(8, 13, 22, 0.98));
   box-shadow: var(--shadow);
+  cursor: pointer;
 }
 
 .crew-card.is-active {
@@ -715,45 +666,24 @@ textarea {
   box-shadow: 0 0 0 1px rgba(126, 202, 255, 0.24), var(--shadow);
 }
 
-.crew-card::before,
-.voice-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.58));
-  pointer-events: none;
-}
-
 .crew-card img {
   width: 100%;
-  height: 340px;
-  object-fit: cover;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: contain;
+  background: linear-gradient(180deg, rgba(19, 31, 49, 0.95), rgba(7, 12, 20, 0.95));
+  padding: 0.7rem;
 }
 
-.crew-card-body,
-.voice-card-body {
-  position: relative;
-  z-index: 1;
+.crew-card-body {
   padding: 1rem;
 }
 
-.crew-card h3,
-.voice-card h3 {
-  margin: 0;
-}
-
-.crew-meta,
-.voice-meta {
+.crew-meta {
   display: flex;
   gap: 0.6rem;
   flex-wrap: wrap;
   margin-top: 0.45rem;
-}
-
-.crew-card p,
-.voice-card p {
-  color: var(--text-dim);
-  margin: 0.75rem 0 0;
 }
 
 .crew-quote {
@@ -763,35 +693,19 @@ textarea {
   color: var(--silver);
 }
 
-.voice-profile-grid {
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+.rank-crew-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.voice-card-body .field {
-  margin-top: 0.75rem;
-}
-
-.voice-test-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-  margin-top: 1rem;
-}
-
-.voice-disclaimer {
-  color: var(--text-soft);
-  margin-bottom: 0;
+.rank-visual-panel {
+  padding: 1rem;
 }
 
 .mission-log {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
-.mission-log-card {
-  min-height: 100%;
-}
-
-.mission-log-card .log-status {
+.log-status {
   display: inline-flex;
   margin-top: 0.8rem;
   color: var(--success);
@@ -805,7 +719,7 @@ textarea {
 @media (max-width: 1180px) {
   .story-shell,
   .ship-grid,
-  .voices-layout,
+  .rank-layout,
   .hero-grid {
     grid-template-columns: 1fr;
   }
@@ -826,7 +740,8 @@ textarea {
   }
 
   .status-grid,
-  .ship-section-cards {
+  .ship-section-cards,
+  .rank-crew-grid {
     grid-template-columns: 1fr;
   }
 
@@ -840,11 +755,6 @@ textarea {
 
   .dialogue-card {
     grid-template-columns: 1fr;
-  }
-
-  .dialogue-avatar {
-    width: 56px;
-    height: 56px;
   }
 
   .topnav {
